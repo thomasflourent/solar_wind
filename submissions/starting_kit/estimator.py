@@ -20,7 +20,7 @@ def compute_rolling_std(X_df, feature, time_window, center=False):
         boolean to indicate if the point of the dataframe considered is
         center or end of the window
     """
-    name = '_'.join([feature, time_window, 'std'])
+    name = "_".join([feature, time_window, "std"])
     X_df[name] = X_df[feature].rolling(time_window, center=center).std()
     X_df[name] = X_df[name].ffill().bfill()
     X_df[name] = X_df[name].astype(X_df[feature].dtype)
@@ -28,12 +28,11 @@ def compute_rolling_std(X_df, feature, time_window, center=False):
 
 
 class FeatureExtractor(BaseEstimator):
-
     def fit(self, X, y):
         return self
 
     def transform(self, X):
-        return compute_rolling_std(X, 'Beta', '2h')
+        return compute_rolling_std(X, "Beta", "2h")
 
 
 def get_estimator():
